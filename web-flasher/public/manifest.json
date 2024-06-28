@@ -1,0 +1,11 @@
+{
+  "name": "HardwareDDC",
+  "version": "2024.6.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [{ "path": "./combined.bin", "offset": 0 }]
+    }
+  ]
+}

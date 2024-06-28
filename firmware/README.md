@@ -24,7 +24,7 @@ wget -O ESP32-v1.23.0.bin https://micropython.org/resources/firmware/ESP32_GENER
 Combine images:
 
 ```bash
-esptool.py --chip esp32 merge_bin -o combined.bin --flash_mode dio --flash_freq 40m --flash_size 4MB 0x1000 ESP320-v1.23.0-firmware.bin 0x200000 combined.bin
+esptool.py --chip esp32 merge_bin -o combined.bin --flash_mode dio --flash_freq 40m --flash_size 4MB 0x1000 ESP32-v1.23.0.bin 0x200000 littlefs.bin
 ```
 
 Determine serial:
@@ -36,5 +36,5 @@ ls /dev/cu.*
 Flash image:
 
 ```bash
-esptool.py --chip esp32 --port /dev/<serial port> write_flash -z 0x0 combined.bin
+esptool.py --chip esp32 --port <serial port> write_flash -z 0x0 combined.bin
 ```

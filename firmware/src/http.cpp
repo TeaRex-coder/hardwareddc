@@ -1,7 +1,7 @@
-#include "http.h"
+#include "../include/http.h"
 #include <WiFi.h>
 #include <Esp.h>
-#include "ddc.h"
+#include "../lib/ddc/ddc.h"
 
 extern WiFiServer server;
 extern DDC ddc;

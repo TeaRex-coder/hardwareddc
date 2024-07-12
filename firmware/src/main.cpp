@@ -1,6 +1,6 @@
-#include "improv.h"
-#include "http.h"
-#include "ddc.h"
+#include "../include/improv.h"
+#include "../include/http.h"
+#include "../lib/ddc/ddc.h"
 
 DDC ddc;
 

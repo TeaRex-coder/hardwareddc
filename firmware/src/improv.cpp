@@ -1,4 +1,5 @@
-#include "improv.h"
+#include "../lib/improv/ImprovWiFiLibrary.h"
+#include "../include/improv.h"
 #include <WiFi.h>
 #include <Preferences.h>
 

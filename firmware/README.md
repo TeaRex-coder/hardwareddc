@@ -7,33 +7,15 @@ HardwareDDC is built using Espressif's ESP32-WROOM-32E-N4.
 Build environment tools:
 
 - [esptool.py](https://github.com/espressif/esptool)
-- [mklittlefs](https://github.com/earlephilhower/mklittlefs)
+- [PlatformIO](https://github.com/platformio)
 
-Bundle source code into littlefs image.
-
-```bash
-mklittlefs -c ./src -b 4096 -p 256 -s 0x200000 littlefs.bin
-```
-
-Download MicroPython image:
+### Generate image
 
 ```bash
-wget -O ESP32-v1.23.0.bin https://micropython.org/resources/firmware/ESP32_GENERIC-20240602-v1.23.0.bin
+esptool.py --chip esp32 merge_bin -o ./public/combined.bin --flash_mode dio --flash_size 4MB 0x1000 ./firmware/.pio/build/esp32dev/bootloader.bin 0x8000 ./firmware/.pio/build/esp32dev/partitions.bin 0x10000 ./firmware/.pio/build/esp32dev/firmware.bin
 ```
 
-Combine images:
-
-```bash
-esptool.py --chip esp32 merge_bin -o combined.bin --flash_mode dio --flash_freq 40m --flash_size 4MB 0x1000 ESP32-v1.23.0.bin 0x200000 littlefs.bin
-```
-
-Determine serial:
-
-```bash
-ls /dev/cu.*
-```
-
-Flash image:
+### Flash Image
 
 ```bash
 esptool.py --chip esp32 --port <serial port> write_flash -z 0x0 combined.bin

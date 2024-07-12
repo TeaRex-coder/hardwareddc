@@ -1,11 +1,24 @@
 {
   "name": "HardwareDDC",
-  "version": "2024.6.0",
+  "version": "2024.7.0",
   "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP32",
-      "parts": [{ "path": "./combined.bin", "offset": 0 }]
+      "parts": [
+        {
+          "path": "./firmware/.pio/build/esp32dev/bootloader.bin",
+          "offset": 4096
+        },
+        {
+          "path": "./firmware/.pio/build/esp32dev/partitions.bin",
+          "offset": 32768
+        },
+        {
+          "path": "./firmware/.pio/build/esp32dev/firmware.bin",
+          "offset": 65536
+        }
+      ]
     }
   ]
 }

@@ -4,7 +4,7 @@ import "./App.css";
 const EspWebInstallButton = () => {
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "installer/install-button.js";
+    script.src = "/installer/install-button.js";
     script.type = "module";
     script.async = true;
     document.body.appendChild(script);

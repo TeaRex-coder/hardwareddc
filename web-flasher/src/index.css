@@ -17,11 +17,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #88c0d0;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #88c0d0;
 }
 
 body {
@@ -37,6 +37,12 @@ h1 {
   line-height: 1.1;
 }
 
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2em; /* or any size that fits better */
+  }
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -49,7 +55,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #88c0d0;
 }
 button:focus,
 button:focus-visible {

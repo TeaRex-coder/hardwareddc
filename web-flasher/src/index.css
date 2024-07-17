@@ -39,7 +39,7 @@ h1 {
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 2em; /* or any size that fits better */
+    font-size: 2em;
   }
 }
 
@@ -74,3 +74,19 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+:root {
+  --mdc-theme-surface: #242424 !important;
+}
+
+:root {
+  --mdc-dialog-heading-ink-color: #ffffff !important;
+}
+
+/* --improv-text-color defined in styles-fa761598.js line 3726 */
+
+:root {
+  --improv-primary-color: #88c0d0 !important;
+}
+
+/* --improv-danger-color defined in styles-fa761598.js line 3725 */

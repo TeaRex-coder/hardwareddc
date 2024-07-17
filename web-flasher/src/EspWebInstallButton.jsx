@@ -3,14 +3,14 @@ import "./App.css";
 
 const EspWebInstallButton = () => {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "/installer/install-button.js";
-    script.type = "module";
-    script.async = true;
-    document.body.appendChild(script);
+    const loadScript = async () => {
+      await import("./installer/install-button.js");
+    };
+
+    loadScript();
 
     return () => {
-      document.body.removeChild(script);
+      // Any cleanup if necessary
     };
   }, []);
 

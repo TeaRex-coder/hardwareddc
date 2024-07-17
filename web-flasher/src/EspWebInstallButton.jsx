@@ -8,10 +8,6 @@ const EspWebInstallButton = () => {
     };
 
     loadScript();
-
-    return () => {
-      // Any cleanup if necessary
-    };
   }, []);
 
   return (

@@ -84,9 +84,15 @@ button:focus-visible {
 }
 
 /* --improv-text-color defined in styles-fa761598.js line 3726 */
+:root {
+  --improv-text-color: #ffffff !important;
+}
 
 :root {
   --improv-primary-color: #88c0d0 !important;
 }
 
 /* --improv-danger-color defined in styles-fa761598.js line 3725 */
+:root {
+  --improv-danger-color: #8fbcbb !important;
+}

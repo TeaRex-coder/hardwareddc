@@ -39,23 +39,25 @@ _Edit macros in [hardware-ddc.lua](./macos/hardware-ddc.lua)_
 
 ## Windows
 
-1. Install [AutoHotkey](https://www.autohotkey.com/)
-2. script...
+1. Install [AutoHotkey](https://www.autohotkey.com)
+2. Create [hardware-ddc.ahk](./windows/hardware-ddc.ahk) shortcut to run at startup in `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`
 
-_Edit macros in script_
+### Hotkeys
+
+_Edit macros in [hardware-ddc.ahk](./windows/hardware-ddc.ahk)_
 
 **Brightness:**
 
-- ^⌥1 = 0%
-- ^⌥2 = 25%
-- ^⌥3 = 50%
-- ^⌥4 = 75%
-- ^⌥5 = 100%
+- ^⌥1 = 25%
+- ^⌥2 = 50%
+- ^⌥3 = 75%
+- ^⌥4 = 100%
+- ^⌥5 = 0%
 
 <p></p>
 
-- ^⌥- = -5%
-- ^⌥= = +5%
+- ^F1- = -6%
+- ^F2 = +6%
 
 **Input Source:**
 

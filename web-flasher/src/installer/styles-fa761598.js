@@ -3722,8 +3722,8 @@ const be = l`
   :host {
     --mdc-theme-primary: var(--improv-primary-color, #03a9f4);
     --mdc-theme-on-primary: var(--improv-on-primary-color, #fff);
-    --improv-danger-color: #8FBCBB;
-    --improv-text-color: rgba(255, 255, 255, 1);
+    --improv-danger-color: #0e7490;
+    --improv-text-color: rgba(250, 250, 250, 1);
     --mdc-theme-text-primary-on-background: var(--improv-text-color);
     --mdc-dialog-content-ink-color: var(--improv-text-color);
     text-align: left;

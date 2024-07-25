@@ -1,6 +1,13 @@
 <h1 align="center">HardwareDDC</h1>
 <h4 align="center">A custom PCB that makes adjusting monitor settings easy and convenient</h4>
 
+<!-- Horizontal layout with 3 images -->
+<p align="center">
+  <img src="./images/boardfront.webp" alt="front-view" width="250" height="250">
+  <img src="./images/assembled.webp" alt="assembled" width="250" height="250">
+  <img src="./images/boardtop.webp" alt="top-view" width="250" height="250">
+</p>
+
 ## What is DDC?
 
 DDC/CI (Display Data Channel Command Interface) lets you control monitors with software instead of navigating the nipple or rear buttons. In a perfect world, we could control all monitors with DDC, but unfortunately, that's not the case...

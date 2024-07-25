@@ -1,8 +1,3 @@
-# React + Vite
+# Web Installer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+HardwareDDC's web installer uses [ESP Web Tools](https://github.com/esphome/esp-web-tools) to connects to the ESP32's UART console with [esptool-js](https://github.com/espressif/esptool-js) and uses [Improv](https://github.com/improv-wifi) to congfigure Wi-Fi over serial.

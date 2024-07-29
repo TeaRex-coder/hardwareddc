@@ -22,7 +22,7 @@ If you are in one of those last two situations HardwareDDC might be for you! It 
 
 HardwareDDC features an ESP32 with reset and boot buttons, an HDMI connector exposing GND, SDA and SCL, and it's powered by USB-C which also exposes the UART console. Optionally, it can be powered by 5V directly through the GPIO pins, and additional GPIO pins are available for debugging and future expandability.
 
-The PCB and the 3D printed ABS case are available [here](https://hardwareddc.alexandreboutoille.com).
+The PCB and the 3D printed ABS case are available [here](./hardware/README.md).
 
 Once you have your board, you can flash the firmware with the [web installer](https://hardwareddc.alexandreboutoille.com).
 

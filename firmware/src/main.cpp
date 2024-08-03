@@ -3,14 +3,16 @@
 #include "../lib/ddc/ddc.h"
 
 DDC ddc;
+bool ddcConnected = false;
 
-void brightnessSetup() {
-    Serial.begin(9600);
+void ddcSetup() {
+    Serial.begin(115200);
     while (!ddc.begin()) {
-        Serial.print(F("DDC error. Trying again in 5 sec.\n"));
+        Serial.print(F("DDC didn't connect, wait 5 sec\n"));
         delay(5000);
     }
-    Serial.print(F("DDC found.\n"));
+    Serial.print(F("DDC found\n"));
+    ddcConnected = true;
 }
 
 void setup() {
@@ -18,7 +20,7 @@ void setup() {
     wifiSetup();
     if (improvSerial.isConnected()) {
         httpSetup();
-        brightnessSetup();
+        ddcSetup();
     }
 }
 

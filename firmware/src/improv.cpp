@@ -4,7 +4,7 @@
 #include "../include/improv.h"
 #include "../lib/improv/ImprovWiFiLibrary.h"
 
-WiFiServer server(80);
+WiFiServer server(3485);
 ImprovWiFi improvSerial(&Serial);
 Preferences preferences;
 

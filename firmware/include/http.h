@@ -3,7 +3,7 @@
 
 #include <WiFi.h>
 
-void handleHttpRequest(WiFiClient &client);
+void handleHttpRequest(WiFiClient& client);
 void httpSetup();
 void httpLoop();
 

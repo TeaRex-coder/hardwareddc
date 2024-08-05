@@ -15,6 +15,7 @@ void handleSetSmooth(WiFiClient& client, int startValue, int endValue);
 void handleSmoothStatus(WiFiClient& client);
 void handleGetBrightness(WiFiClient& client);
 void handleSetBrightness(WiFiClient& client, int value);
+void handleSetSource(WiFiClient& client, int value);
 void handleDDCStatus(WiFiClient& client);
 void handleDisplayPower(WiFiClient& client);
 void handleDisplayPowerValue(WiFiClient& client);
@@ -85,6 +86,14 @@ void handleHttpRequest(WiFiClient& client) {
                     }
                 } else if (request.startsWith("get /1/brightness")) {
                     handleGetBrightness(client);
+                } else if (request.startsWith("get /1/input_source/")) {
+                    int startIndex =
+                        request.indexOf("/1/input_source/") + String("/1/input_source/").length();
+                    int endIndex = request.indexOf(" ", startIndex);
+
+                    String sourceValueStr = request.substring(startIndex, endIndex);
+                    int sourceValue = (int)strtol(sourceValueStr.c_str(), NULL, 0);
+                    handleSetSource(client, sourceValue);
                 } else if (request.startsWith("get /1")) {
                     handleDDCStatus(client);
                 } else if (request.startsWith("get /display-power/")) {
@@ -133,6 +142,7 @@ void handleDisplays(WiFiClient& client) {
         client.println("Run \"ddcutil environment\" to check for system configuration problems.");
         return;
     }
+
     String mfg = ddc.getMfg();
     String model = ddc.getModel();
     String productCode = ddc.getProduct();
@@ -143,24 +153,31 @@ void handleDisplays(WiFiClient& client) {
     uint8_t week = ddc.getWeek();
     String vcpVersion = ddc.getVCP();
 
+    String responseContent;
+    responseContent += "Display 1\n";
+    responseContent += "   I2C bus: /dev/i2c-2\n";
+    responseContent += "   EDID synopsis:\n";
+    responseContent += "      Mfg id:               " + mfg + "\n";
+    responseContent += "      Model:                " + model + "\n";
+    responseContent += "      Product code:         " + productCode + "\n";
+    responseContent += "      Serial number:        " + productSerial + "\n";
+    responseContent +=
+        "      Binary serial number: " + String(serialDecimal) + " (" + serial + ")\n";
+    responseContent +=
+        "      Manufacture year:     " + String(year) + ",  Week: " + String(week) + "\n";
+    responseContent += "   VCP version:         " + vcpVersion + "\n";
+    responseContent += "\n";
+
+    int contentLength = responseContent.length();
+
     client.println("HTTP/1.1 200 OK");
     client.println("Connection: keep-alive");
     client.println("X-Powered-By: Kemal");
     client.println("Content-Type: text/html");
-    client.println("Content-Length: 316");
+    client.print("Content-Length: ");
+    client.println(contentLength);
     client.println();
-
-    client.println("Display 1");
-    client.println("   I2C bus: /dev/i2c-2");
-    client.println("   EDID synopsis:");
-    client.println("      Mfg id:               " + mfg);
-    client.println("      Model:                " + model);
-    client.println("      Product code:         " + productCode);
-    client.println("      Serial number:        " + productSerial);
-    client.println("      Binary serial number: " + String(serialDecimal) + " (" + serial + ")");
-    client.println("      Manufacture year:     " + String(year) + ",  Week: " + String(week));
-    client.println("   VCP version:         " + vcpVersion);
-    client.println("");
+    client.print(responseContent);
 }
 
 void handleSetSmooth(WiFiClient& client, int startValue, int endValue) {
@@ -229,9 +246,19 @@ void handleGetBrightness(WiFiClient& client) {
     client.println("Connection: keep-alive");
     client.println("X-Powered-By: Kemal");
     client.println("Content-Type: text/html");
-    client.println("Content-Length: 3");
+    client.print("Content-Length: ");
+    client.println(String(brightness).length());
     client.println();
     client.println(brightness);
+}
+
+void handleSetSource(WiFiClient& client, int value) {
+    ddc.setSource(value);
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
 }
 
 void handleDDCStatus(WiFiClient& client) {
@@ -254,7 +281,7 @@ void handleDDCStatus(WiFiClient& client) {
     }
 }
 
-// Pi specific
+// macOS Lunar Pi specific placeholders
 
 void handleDisplayPower(WiFiClient& client) {
     client.println("HTTP/1.1 200 OK");

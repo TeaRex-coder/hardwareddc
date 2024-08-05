@@ -8,7 +8,7 @@ extern ImprovWiFi improvSerial;
 void wifiSetup();
 void wifiLoop();
 void onImprovWiFiErrorCb(ImprovTypes::Error err);
-void onImprovWiFiConnectedCb(const char *ssid, const char *password);
-bool connectWifi(const char *ssid, const char *password);
+void onImprovWiFiConnectedCb(const char* ssid, const char* password);
+bool connectWifi(const char* ssid, const char* password);
 
 #endif

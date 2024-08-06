@@ -64,11 +64,6 @@ _Edit macros in [hardware-ddc.ahk](./windows/hardware-ddc.ahk)_
 - ^⌥4 = 100%
 - ^⌥5 = 0%
 
-<p></p>
-
-- ^F1- = -6%
-- ^F2 = +6%
-
 **Input Source:**
 
 - ^⌥h1 HDMI 1

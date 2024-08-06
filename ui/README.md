@@ -1,10 +1,20 @@
 # User Interface
 
-HardwareDDC's goal is to provide and easy and convenient way to adjust monitor settings. Therefore, I prioritized an efficient macro-based UX and have not yet release a GUI.
+HardwareDDC's goal is to provide and easy and convenient way to adjust monitor settings. Therefore, I prioritized an efficient macro-based UX and have not yet released a first-party GUI.
 
 Currently, HardwareDDC is controlled with hotkeys sending API requests.
 
 ## macOS
+
+### Lunar
+
+Lunar, _the defacto app for controlling monitors_, can be used as HardwareDDC's interface instead of Hammerspoon for those preferring a GUI.
+
+1. Install [Lunar](https://static.lunar.fyi/releases/Lunar.dmg)
+2. Disable all controls aside from _Network (Raspberry Pi)_
+3. Reset _Network Control_
+
+### Hammerspoon
 
 1. Install [Hammerspoon](https://www.hammerspoon.org)
 2. Add [hardware-ddc.lua](./macos/hardware-ddc.lua) to your Hammerspoon config `~/.hammerspoon/init.lua`
@@ -77,17 +87,17 @@ This is coming soon, but you're a Linux user, you can figure it out.
 Specify brightness percentage:
 
 ```bash
-curl -X GET "http://hardwareddc.local/brightness?value=<value 0-100>"
+curl -X GET "http://ddcutil.local:3485/1/brightness/<value 0-100>"
 ```
 
 Get current brightness:
 
 ```bash
-curl -X GET "http://hardwareddc.local/brightness"
+curl -X GET "http://ddcutil.local:3485/1/brightness"
 ```
 
 Change input source:
 
 ```bash
-curl -X GET "http://hardwareddc.local/set_source?value=<hexadecimal source code>"
+curl -X GET "http://ddcutil.local:3485/1/input_source<hexadecimal source>"
 ```

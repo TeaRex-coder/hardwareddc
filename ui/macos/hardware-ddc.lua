@@ -1,5 +1,5 @@
 function setSource(value, name)
-    local url = "http://hardwareddc.local/set_source?value=" .. value
+    local url = "http://ddcutil.local:3485/1/input_source/" .. value
     hs.http.asyncGet(url, nil, function(status, body, headers)
     end)
 end
@@ -21,7 +21,7 @@ function setHDMI2()
 end
 
 function setBrightness(value)
-    local url = "http://hardwareddc.local/brightness?value=" .. value
+    local url = "http://ddcutil.local:3485/1/brightness/" .. value
     hs.http.asyncGet(url, nil, function(status, body, headers)
     end)
 end
@@ -47,8 +47,8 @@ function setBrightness100()
 end
 
 function getBrightness(callback)
-    hs.http.asyncGet("http://hardwareddc.local/brightness", nil, function(_, body)
-        local brightness = hs.json.decode(body).current_brightness
+    hs.http.asyncGet("http://ddcutil.local:3485/1/brightness", nil, function(status, body)
+        local brightness = tonumber(body)
         callback(brightness)
     end)
 end

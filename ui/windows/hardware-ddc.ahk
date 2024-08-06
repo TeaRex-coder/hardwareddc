@@ -1,40 +1,17 @@
-setSource(value) {
-    url := "http://hardwareddc.local/set_source?value=" value
-    Http := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-    Http.Open("GET", url, false)
-    Http.Send()
+setSource(source) {
+    url := "http://ddcutil.local:3485/1/input_source/" source
+    HttpRequest(url)
 }
 
 setBrightness(value) {
-    url := "http://hardwareddc.local/brightness?value=" value
-    Http := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-    Http.Open("GET", url, false)
-    Http.Send()
+    url := "http://ddcutil.local:3485/1/brightness/" value
+    HttpRequest(url)
 }
 
-getBrightness() {
-    url := "http://hardwareddc.local/brightness"
-    Http := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-    Http.Open("GET", url, false)
-    Http.Send()
-    response := Http.ResponseText
-    RegExMatch(response, """current_brightness"":\s*(\d+)", match)
-    return match1
-}
-
-adjustBrightness(delta) {
-    currentBrightness := getBrightness()
-    newBrightness := currentBrightness + delta
-    newBrightness := Max(0, Min(100, newBrightness))
-    setBrightness(newBrightness)
-}
-
-increaseBrightness() {
-    adjustBrightness(6)
-}
-
-decreaseBrightness() {
-    adjustBrightness(-6)
+HttpRequest(url) {
+    WebRequest := ComObjCreate("MSXML2.XMLHTTP")
+    WebRequest.Open("GET", url, false)
+    WebRequest.Send()
 }
 
 ^#!1::setSource(0x0f)
@@ -47,6 +24,3 @@ decreaseBrightness() {
 ^!3::setBrightness(75)
 ^!4::setBrightness(100)
 ^!5::setBrightness(0)
-
-^f1::decreaseBrightness()
-^f2::increaseBrightness()

@@ -4,7 +4,7 @@
 #include "../include/improv.h"
 #include "../lib/improv/ImprovWiFiLibrary.h"
 
-WiFiServer server(80);
+WiFiServer server(3485);
 ImprovWiFi improvSerial(&Serial);
 Preferences preferences;
 
@@ -44,7 +44,8 @@ void onImprovWiFiConnectedCb(const char* ssid, const char* password) {
     preferences.putString("password", password);
     server.begin();
 
-    MDNS.begin("hardwareddc");
+    MDNS.begin("ddcutil");
+    MDNS.addService("_ddcutil", "_tcp", 3485);
 }
 
 bool connectWifi(const char* ssid, const char* password) {
@@ -55,7 +56,8 @@ bool connectWifi(const char* ssid, const char* password) {
     }
 
     if (WiFi.status() == WL_CONNECTED) {
-        MDNS.begin("hardwareddc");
+        MDNS.begin("ddcutil");
+        MDNS.addService("_ddcutil", "_tcp", 3485);
     }
 
     return WiFi.status() == WL_CONNECTED;
@@ -71,6 +73,7 @@ void connectToSavedWiFi(const char* ssid, const char* password) {
     if (WiFi.status() == WL_CONNECTED) {
         server.begin();
 
-        MDNS.begin("hardwareddc");
+        MDNS.begin("ddcutil");
+        MDNS.addService("_ddcutil", "_tcp", 3485);
     }
 }

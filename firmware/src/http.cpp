@@ -5,13 +5,23 @@
 
 extern WiFiServer server;
 extern DDC ddc;
+extern bool ddcConnected;
 
 char linebuf[80];
 int charcount = 0;
 
-void handleSetBrightness(String request, WiFiClient& client);
+void handleDisplays(WiFiClient& client);
+void handleSetSmooth(WiFiClient& client, int startValue, int endValue);
+void handleSmoothStatus(WiFiClient& client);
 void handleGetBrightness(WiFiClient& client);
-void handleSetSource(String request, WiFiClient& client);
+void handleSetBrightness(WiFiClient& client, int value);
+void handleSetSource(WiFiClient& client, int value);
+void handleDDCStatus(WiFiClient& client);
+void handleDisplayPower(WiFiClient& client);
+void handleDisplayPowerValue(WiFiClient& client);
+void handleVersion(WiFiClient& client);
+void handleUpdate(WiFiClient& client);
+void handleFullUpdate(WiFiClient& client);
 
 void httpSetup() {
     server.begin();
@@ -39,21 +49,79 @@ void handleHttpRequest(WiFiClient& client) {
 
             if (c == '\n' && currentLineIsBlank) {
                 String request = String(linebuf);
-                if (request.startsWith("GET /brightness?value=")) {
-                    handleSetBrightness(request, client);
-                } else if (request.startsWith("GET /brightness")) {
+
+                for (int i = 0; i < request.length(); i++) {
+                    request[i] = tolower(request[i]);
+                }
+
+                if (request.startsWith("get /displays")) {
+                    handleDisplays(client);
+                } else if (request.startsWith("get /smooth/1/brightness/")) {
+                    int startIndex = request.indexOf("/smooth/1/brightness/") +
+                                     String("/smooth/1/brightness/").length();
+                    int endIndex = request.indexOf("/", startIndex);
+
+                    String brightnessValueOneStr = request.substring(startIndex, endIndex);
+                    int brightnessValueOne = brightnessValueOneStr.toInt();
+
+                    startIndex = endIndex + 1;
+                    endIndex = request.indexOf(" ", startIndex);
+                    String brightnessValueTwoStr = request.substring(startIndex, endIndex);
+                    int brightnessValueTwo = brightnessValueTwoStr.toInt();
+
+                    handleSetSmooth(client, brightnessValueOne, brightnessValueTwo);
+                } else if (request.startsWith("get /smooth/1")) {
+                    handleSmoothStatus(client);
+                } else if (request.startsWith("get /1/brightness/")) {
+                    int startIndex =
+                        request.indexOf("/1/brightness/") + String("/1/brightness/").length();
+                    int endIndex = request.indexOf(" ", startIndex);
+
+                    if (endIndex > startIndex) {
+                        String brightnessValueStr = request.substring(startIndex, endIndex);
+                        int brightnessValue = brightnessValueStr.toInt();
+                        handleSetBrightness(client, brightnessValue);
+                    } else {
+                        handleGetBrightness(client);
+                    }
+                } else if (request.startsWith("get /1/brightness")) {
                     handleGetBrightness(client);
-                } else if (request.startsWith("GET /set_source?value=")) {
-                    handleSetSource(request, client);
+                } else if (request.startsWith("get /1/input_source/")) {
+                    int startIndex =
+                        request.indexOf("/1/input_source/") + String("/1/input_source/").length();
+                    int endIndex = request.indexOf(" ", startIndex);
+
+                    String sourceValueStr = request.substring(startIndex, endIndex);
+                    int sourceValue = (int)strtol(sourceValueStr.c_str(), NULL, 0);
+                    handleSetSource(client, sourceValue);
+                } else if (request.startsWith("get /1")) {
+                    handleDDCStatus(client);
+                } else if (request.startsWith("get /display-power/")) {
+                    handleDisplayPowerValue(client);
+                } else if (request.startsWith("get /display-power")) {
+                    handleDisplayPower(client);
+                } else if (request.startsWith("get /version")) {
+                    handleVersion(client);
+                } else if (request.startsWith("get /update")) {
+                    handleUpdate(client);
+                } else if (request.startsWith("get /full-update")) {
+                    handleFullUpdate(client);
                 } else {
-                    client.println("HTTP/1.1 404 Not Found");
-                    client.println("Content-Type: application/json");
-                    client.println("Connection: close");
+                    client.println("HTTP/1.1 400 Error");
+                    client.println("Connection: keep-alive");
+                    client.println("X-Powered-By: Kemal");
+                    client.println("Content-Type: text/html");
+                    client.println("Content-Length: 5");
                     client.println();
-                    client.println(
-                        "{\"status\":\"error\", \"message\":\"endpoint doesn't exist\"}");
+                    client.println("Error");
                 }
                 break;
+            }
+
+            if (c == '\n') {
+                currentLineIsBlank = true;
+            } else if (c != '\r') {
+                currentLineIsBlank = false;
             }
         }
     }
@@ -61,63 +129,200 @@ void handleHttpRequest(WiFiClient& client) {
     client.stop();
 }
 
-void handleSetBrightness(String request, WiFiClient& client) {
-    int valueStart = request.indexOf('=') + 1;
-    int valueEnd = request.indexOf(' ', valueStart);
-    if (valueEnd == -1) {
-        valueEnd = request.length();
-    }
-    String valueStr = request.substring(valueStart, valueEnd);
-    int brightnessValue = valueStr.toInt();
-
-    if (brightnessValue >= 0 && brightnessValue <= 100) {
-        ddc.setBrightness(brightnessValue);
+void handleDisplays(WiFiClient& client) {
+    if (!ddcConnected) {
         client.println("HTTP/1.1 200 OK");
-        client.println("Content-Type: application/json");
-        client.println("Connection: close");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 143");
         client.println();
-        client.println("{\"status\":\"success\", \"brightness\":" + String(brightnessValue) + "}");
-    } else {
-        client.println("HTTP/1.1 400 Bad Request");
-        client.println("Content-Type: application/json");
-        client.println("Connection: close");
-        client.println();
-        client.println("{\"status\":\"error\", \"message\":\"brightness has to be from 0-100\"}");
+        client.println("No displays found.");
+        client.println("Is DDC/CI enabled in the monitor's on screen display?");
+        client.println("Run \"ddcutil environment\" to check for system configuration problems.");
+        return;
     }
+
+    String mfg = ddc.getMfg();
+    String model = ddc.getModel();
+    String productCode = ddc.getProduct();
+    String productSerial = ddc.getProductSerial();
+    uint32_t serialDecimal = ddc.getSerialDecimal();
+    String serial = ddc.getSerial();
+    uint16_t year = ddc.getYear();
+    uint8_t week = ddc.getWeek();
+    String vcpVersion = ddc.getVCP();
+
+    String responseContent;
+    responseContent += "Display 1\n";
+    responseContent += "   I2C bus: /dev/i2c-2\n";
+    responseContent += "   EDID synopsis:\n";
+    responseContent += "      Mfg id:               " + mfg + "\n";
+    responseContent += "      Model:                " + model + "\n";
+    responseContent += "      Product code:         " + productCode + "\n";
+    responseContent += "      Serial number:        " + productSerial + "\n";
+    responseContent +=
+        "      Binary serial number: " + String(serialDecimal) + " (" + serial + ")\n";
+    responseContent +=
+        "      Manufacture year:     " + String(year) + ",  Week: " + String(week) + "\n";
+    responseContent += "   VCP version:         " + vcpVersion + "\n";
+    responseContent += "\n";
+
+    int contentLength = responseContent.length();
+
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.print("Content-Length: ");
+    client.println(contentLength);
+    client.println();
+    client.print(responseContent);
+}
+
+void handleSetSmooth(WiFiClient& client, int startValue, int endValue) {
+    int step = (startValue < endValue) ? 1 : -1;
+    int currentValue = startValue;
+
+    while (currentValue != endValue) {
+        ddc.setBrightness(currentValue);
+        currentValue += step;
+        delay(50);
+    }
+
+    ddc.setBrightness(endValue);
+
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
+}
+
+void handleSmoothStatus(WiFiClient& client) {
+    if (ddcConnected) {
+        client.println("HTTP/1.1 200 OK");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 2");
+        client.println();
+        client.println("OK");
+    } else {
+        client.println("HTTP/1.1 400 Error");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 5");
+        client.println();
+        client.println("Error");
+    }
+}
+
+void handleSetBrightness(WiFiClient& client, int value) {
+    ddc.setBrightness(value);
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
 }
 
 void handleGetBrightness(WiFiClient& client) {
-    int currentBrightness = ddc.getBrightness();
+    if (!ddcConnected) {
+        client.println("HTTP/1.1 400 Error");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 5");
+        client.println();
+        client.println("Error");
+        return;
+    }
+
+    int brightness = ddc.getBrightness();
+
     client.println("HTTP/1.1 200 OK");
-    client.println("Content-Type: application/json");
-    client.println("Connection: close");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.print("Content-Length: ");
+    client.println(String(brightness).length());
     client.println();
-    client.println("{\"status\":\"success\", \"current_brightness\":" + String(currentBrightness) +
-                   "}");
+    client.println(brightness);
 }
 
-void handleSetSource(String request, WiFiClient& client) {
-    int valueStart = request.indexOf('=') + 1;
-    int valueEnd = request.indexOf(' ', valueStart);
-    if (valueEnd == -1) {
-        valueEnd = request.length();
-    }
-    String valueStr = request.substring(valueStart, valueEnd);
-    unsigned int sourceValue = (unsigned int)strtol(valueStr.c_str(), NULL, 16);
+void handleSetSource(WiFiClient& client, int value) {
+    ddc.setSource(value);
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
+}
 
-    if (sourceValue == 0x0f || sourceValue == 0x10 || sourceValue == 0x11 || sourceValue == 0x12) {
-        ddc.setSource(sourceValue);
+void handleDDCStatus(WiFiClient& client) {
+    if (ddcConnected) {
         client.println("HTTP/1.1 200 OK");
-        client.println("Content-Type: application/json");
-        client.println("Connection: close");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 2");
         client.println();
-        client.println("{\"status\":\"success\", \"source\":\"0x" + String(sourceValue, HEX) +
-                       "\"}");
+        client.println("OK");
     } else {
-        client.println("HTTP/1.1 400 Bad Request");
-        client.println("Content-Type: application/json");
-        client.println("Connection: close");
+        client.println("HTTP/1.1 400 Error");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 5");
         client.println();
-        client.println("{\"status\":\"error\", \"message\":\"invalid source value\"}");
+        client.println("Error");
     }
+}
+
+// macOS Lunar Pi specific placeholders
+
+void handleDisplayPower(WiFiClient& client) {
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 16");
+    client.println();
+    client.println("display_power=1");
+}
+
+void handleDisplayPowerValue(WiFiClient& client) {
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
+}
+
+void handleVersion(WiFiClient& client) {
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 3");
+    client.println();
+    client.println("1.0");
+}
+
+void handleUpdate(WiFiClient& client) {
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
+}
+
+void handleFullUpdate(WiFiClient& client) {
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
 }

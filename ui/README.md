@@ -94,5 +94,5 @@ curl -X GET "http://ddcutil.local:3485/1/brightness"
 Change input source:
 
 ```bash
-curl -X GET "http://ddcutil.local:3485/1/input_source<hexadecimal source>"
+curl -X GET "http://ddcutil.local:3485/1/input_source/<hexadecimal source>"
 ```

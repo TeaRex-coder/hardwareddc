@@ -28,11 +28,11 @@ Once you have your board, you can flash the firmware with the [web installer](ht
 
 Controlling HardwareDDC is done through hotkeys, instructions can be found [here](./ui/README.md)
 
-## To-Do
+## Future Ideas
 
-- [x] Document Project
-- [ ] Create Proper User Interface
+- [ ] Improve Microsoft Windows UX/Create Proper User Interface
 - [ ] Support Multiple Monitors
+- [ ] Convert DisplayPort to VGA for a non-network-based approach
 
 ## Extras
 

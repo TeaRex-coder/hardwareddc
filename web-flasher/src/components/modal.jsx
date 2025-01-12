@@ -23,8 +23,8 @@ const ModalComponent = () => {
               CA$100
             </p>
             <p className="text-sm text-neutral-800 dark:text-neutral-50">
-              Currently shipping to Canada, America & the UK. If you need another
-              country, please contact me on either:
+              Currently shipping to Canada, America the UK, & Belgium. If you
+              need another country, please contact me on either:
             </p>
             <div className="flex space-x-4">
               <a
@@ -51,7 +51,7 @@ const ModalComponent = () => {
               </a>
             </div>
             <a
-              href="https://buy.stripe.com/aEU3ez0nn2WebdK3ce"
+              href="https://buy.stripe.com/fZebL5b21fJ0chOfZ1"
               target="_blank"
               rel="noopener noreferrer"
               className="install-button rounded-lg border-2 border-transparent px-4 py-2 text-base font-medium bg-neutral-950 text-neutral-50 hover:bg-cyan-900 hover:text-neutral-50 hover:border-cyan-600 dark:bg-neutral-50 dark:text-neutral-950 transition duration-300 ease-in-out cursor-pointer"

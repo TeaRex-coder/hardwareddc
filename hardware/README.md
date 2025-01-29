@@ -29,7 +29,7 @@ _it doesn't matter that much, but it's what I used_
 
 - 4 x Heat Set Insert
 
-<img src="../images/case-step1.webp" alt="case step 1" width="800" height="600" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="../images/case-step1.webp" alt="case step 1" style="display: block; margin-left: auto; margin-right: auto; aspect-ratio: 4 / 3; width: 100%; max-width: 800px;">
 
 <br>
 
@@ -39,7 +39,7 @@ _it doesn't matter that much, but it's what I used_
 
 _Make sure fasteners are centered in the board holes (future revision will reduce the tolerance)_
 
-<img src="../images/case-step2.webp" alt="case step 2" width="800" height="600" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="../images/case-step2.webp" alt="case step 2" style="display: block; margin-left: auto; margin-right: auto; aspect-ratio: 4 / 3; width: 100%; max-width: 800px;">
 
 <br>
 
@@ -47,7 +47,7 @@ _Make sure fasteners are centered in the board holes (future revision will reduc
 
 - 4 x M3x6 FHCS
 
-<img src="../images/case-step3.webp" alt="case step 1" width="800" height="600" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="../images/case-step3.webp" alt="case step 3" style="display: block; margin-left: auto; margin-right: auto; aspect-ratio: 4 / 3; width: 100%; max-width: 800px;">
 
 <br>
 

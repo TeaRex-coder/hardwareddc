@@ -1,75 +1,40 @@
 # User Interface
 
-HardwareDDC's goal is to provide and easy and convenient way to adjust monitor settings. Therefore, I prioritized an efficient macro-based UX and have not yet released a first-party GUI.
-
-Currently, HardwareDDC is controlled with hotkeys sending API requests.
+HardwareDDC's goal is to provide and easy and convenient way to adjust monitor settings. Currently, HardwareDDC is controlled through an efficient macro-based UI.
 
 ## macOS
 
-### Lunar
-
-Lunar, _the defacto app for controlling monitors_, can be used as HardwareDDC's interface instead of Hammerspoon for those preferring a GUI.
+Lunar, _the defacto app for controlling monitors_, is used as HardwareDDC's macOS GUI.
 
 1. Install [Lunar](https://static.lunar.fyi/releases/Lunar.dmg)
 2. Disable all controls aside from _Network (Raspberry Pi)_
 3. Reset _Network Control_
 
-### Hammerspoon
-
-1. Install [Hammerspoon](https://www.hammerspoon.org)
-2. Add [hardware-ddc.lua](./macos/hardware-ddc.lua) to your Hammerspoon config `~/.hammerspoon/init.lua`
-
-```lua
-local env = require("hardware-ddc")
-```
-
-### Hotkeys
-
-_Edit macros in [hardware-ddc.lua](./macos/hardware-ddc.lua)_
-
-**Brightness:**
-
-- ^⌘5 = 0%
-- ^⌘1 = 25%
-- ^⌘2 = 50%
-- ^⌘3 = 75%
-- ^⌘4 = 100%
-
-<p></p>
-
-- fn + F1 = -6%
-- fn + F2 = +6%
-
-**Input Source:**
-
-- ^⌘h1 HDMI 1
-- ^⌘h2 HDMI 2
-- ^⌘d1 DisplayPort 1
-- ^⌘d2 DisplayPort 2
-
 ## Windows
 
-1. Install [AutoHotkey](https://www.autohotkey.com)
-2. Create [hardware-ddc.ahk](./windows/hardware-ddc.ahk) shortcut to run at startup in `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`
+1. Install [hardwareddc-amd64-installer.exe](https://github.com/TeaRex-coder/hardwareddc/releases) from the latest GitHub release
 
 ### Hotkeys
 
-_Edit macros in [hardware-ddc.ahk](./windows/hardware-ddc.ahk)_
+_User-modifiable hotkeys to come_
 
 **Brightness:**
 
-- ^⌥1 = 25%
-- ^⌥2 = 50%
-- ^⌥3 = 75%
-- ^⌥4 = 100%
-- ^⌥5 = 0%
+- ⌥⇧- = +10%
+- ⌥⇧= = +10%
+
+- ⌥⇧1 = 25%
+- ⌥⇧2 = 50%
+- ⌥⇧3 = 75%
+- ⌥⇧4 = 100%
+- ⌥⇧5 = 0%
 
 **Input Source:**
 
-- ^⌥h1 HDMI 1
-- ^⌥h2 HDMI 2
-- ^⌥d1 DisplayPort 1
-- ^⌥d2 DisplayPort 2
+- ⌥⇧d1 = DisplayPort 1
+- ⌥⇧d2 = DisplayPort 2
+- ⌥⇧h1 = HDMI 1
+- ⌥⇧h2 = HDMI 2
 
 ## Linux
 

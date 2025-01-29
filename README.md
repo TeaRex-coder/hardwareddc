@@ -31,7 +31,9 @@ Controlling HardwareDDC is done through hotkeys, instructions can be found [here
 
 ## Future Ideas
 
-- [ ] Improve Microsoft Windows UX/Create Proper User Interface
+- [x] Improve Microsoft Windows UX/Create Proper User Interface
+  - [ ] Add more information to GUI (e.g. connection status)
+  - [ ] Enable user-modifiable hotkeys
 - [ ] Support Multiple Monitors
 - [ ] Convert DisplayPort to VGA for a non-network-based approach
 

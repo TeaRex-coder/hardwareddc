@@ -32,7 +32,9 @@ jobs:
         run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
       - name: Build Wails App
-        run: wails build -nsis
+        run: |
+          cd ui/windows
+          wails build -nsis
 
       - name: Upload Installer Artifact
         uses: actions/upload-artifact@v4

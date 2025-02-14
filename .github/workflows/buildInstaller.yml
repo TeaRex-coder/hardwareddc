@@ -35,7 +35,7 @@ jobs:
         run: wails build -nsis
 
       - name: Upload Installer Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: wails-binairies
           path: build/bin/*

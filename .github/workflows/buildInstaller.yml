@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wails-binairies
-          path: build/bin/*
+          path: ui/windows/build/bin/*

@@ -87,17 +87,51 @@ func (a *App) startKeyListener() {
 
 func (a *App) setBrightness(level int) {
 	url := fmt.Sprintf("http://ddcutil.local:3485/1/brightness/%d", level)
-	http.Get(url)
+	resp, err := http.Get(url)
+	if err != nil {
+		// fmt.Print("\n", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		// fmt.Print("\n", resp.StatusCode)
+	}
 }
 
 func (a *App) getBrightness() int {
-	resp, _ := http.Get("http://ddcutil.local:3485/1/brightness")
-	body, _ := io.ReadAll(resp.Body)
-	brightness, _ := strconv.Atoi(string(body))
+	resp, err := http.Get("http://ddcutil.local:3485/1/brightness")
+	if err != nil {
+		// fmt.Print("\n", err)
+		return 50
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		// fmt.Print("\n", err)
+		return 50
+	}
+
+	brightness, err := strconv.Atoi(string(body))
+	if err != nil {
+		// fmt.Print("\n", err)
+		return 50
+	}
+
 	return brightness
 }
 
 func (a *App) setSource(source string) {
 	url := fmt.Sprintf("http://ddcutil.local:3485/1/input_source/%s", source)
-	http.Get(url)
+	resp, err := http.Get(url)
+	if err != nil {
+		// fmt.Print("\n", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		// fmt.Print("\n", resp.StatusCode)
+	}
 }

@@ -20,7 +20,7 @@ const ModalComponent = () => {
               HardwareDDC
             </p>
             <p className="text-lg font-medium text-neutral-800 dark:text-neutral-50">
-              CA$100
+              CA$89
             </p>
             <p className="text-sm text-neutral-800 dark:text-neutral-50">
               Currently shipping to Canada, America the UK, & Belgium. If you

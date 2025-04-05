@@ -29,6 +29,16 @@ Once you have your board, you can flash the firmware with the [web installer](ht
 
 Controlling HardwareDDC is done through hotkeys, instructions can be found [here](./ui/README.md)
 
+---
+
+## Sponsors
+
+<p>
+  <img src="./images/pcbwaylogo.svg " alt="PCBWay Logo" width="300"/>
+</p>
+
+Thank you PCBWay for sponsoring this project providing PCB prototyping <3
+
 ## Future Ideas
 
 - [x] Improve Microsoft Windows UX/Create Proper User Interface

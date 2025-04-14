@@ -33,11 +33,26 @@ Controlling HardwareDDC is done through hotkeys, instructions can be found [here
 
 ## Sponsors
 
-<p>
-  <img src="./images/pcbwaylogo.svg " alt="PCBWay Logo" width="300"/>
-</p>
+<img src="./images/pcbwaylogo.svg " alt="PCBWay Logo" width="300"/>
 
 Thank you PCBWay for sponsoring this project providing PCB prototyping <3
+
+<details>
+<summary>Review & Opinions</summary>
+
+TL;DR Would I recommend PCBWay's PCB service? Yes!
+
+It's impossible for me to provide an unbiased opinion as PCBWay has provided boards free of charge to help me work on this project. However, my experience was overall positive. Starting with their marketing rep Liam, he offered a partnership respectfully and fairly. When placing the order, the team helped me, a novice to PCB design and PCBWay's services, follow some best practices regarding board design and ordering. Finally, the production tracker helped keep my curious mind informed and the assembled product functioned as intended.
+
+When researching PCBWay's brand before agreeing to a partnership, I noticed a customer expressing disappointment in the assembly of an HDMI connector. I took this with a grain of salt, as the dissatisfied customers are generally the loudest, but it was still a concern. The boards I received had well-soldered DisplayPort connector pins to a level as good, if not better than I could do by hand.
+
+<p align="center">
+  <img src="./images/pcbwaySolder.webp" alt="PCBWay Logo" width="720"/>
+</p>
+
+I hope the experience I received is representative of any regular PCBWay customer despite PCBWay expecting a review. If you need PCB prototyping for your project, consider giving them a go :)
+
+</details>
 
 ## Future Ideas
 
@@ -45,7 +60,7 @@ Thank you PCBWay for sponsoring this project providing PCB prototyping <3
   - [ ] Add more information to GUI (e.g. connection status)
   - [ ] Enable user-modifiable hotkeys
 - [ ] Support Multiple Monitors
-- [ ] Convert DisplayPort to VGA for a non-network-based approach
+- [x] Convert DisplayPort to VGA for a non-network-based approach
 
 ## Extras
 

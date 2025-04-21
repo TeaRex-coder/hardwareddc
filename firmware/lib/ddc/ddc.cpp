@@ -59,6 +59,17 @@ uint16_t DDC::getBrightness() {
     return getVCP(0x10);
 }
 
+void DDC::setContrast(int value) {
+    if (value > 100) {
+        value = 100;
+    }
+    setVCP(0x12, value);
+}
+
+uint16_t DDC::getContrast() {
+    return getVCP(0x12);
+}
+
 // 0x01:VGA, 0x03:DVI, 0x0f:DP
 void DDC::setSource(uint16_t value) {
     setVCP(0x60, value);

@@ -10,6 +10,8 @@ public:
     bool begin();
     void setBrightness(int value);
     uint16_t getBrightness();
+    void setContrast(int value);
+    uint16_t getContrast();
     void setVCP(byte op, uint16_t value);
     uint16_t getVCP(byte op);
     void setSource(uint16_t value);

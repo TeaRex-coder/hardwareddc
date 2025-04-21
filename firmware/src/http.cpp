@@ -252,6 +252,39 @@ void handleGetBrightness(WiFiClient& client) {
     client.println(brightness);
 }
 
+void handleSetContrast(WiFiClient& client, int value) {
+    ddc.setContrast(value);
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.println("Content-Length: 0");
+}
+
+void handleGetContrast(WiFiClient& client) {
+    if (!ddcConnected) {
+        client.println("HTTP/1.1 400 Error");
+        client.println("Connection: keep-alive");
+        client.println("X-Powered-By: Kemal");
+        client.println("Content-Type: text/html");
+        client.println("Content-Length: 5");
+        client.println();
+        client.println("Error");
+        return;
+    }
+
+    int contrast = ddc.getContrast();
+
+    client.println("HTTP/1.1 200 OK");
+    client.println("Connection: keep-alive");
+    client.println("X-Powered-By: Kemal");
+    client.println("Content-Type: text/html");
+    client.print("Content-Length: ");
+    client.println(String(contrast).length());
+    client.println();
+    client.println(contrast);
+}
+
 void handleSetSource(WiFiClient& client, int value) {
     ddc.setSource(value);
     client.println("HTTP/1.1 200 OK");

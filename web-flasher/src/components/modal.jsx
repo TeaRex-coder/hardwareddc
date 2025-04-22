@@ -23,8 +23,8 @@ const ModalComponent = () => {
               CA$89
             </p>
             <p className="text-sm text-neutral-800 dark:text-neutral-50">
-              Currently shipping to Canada, America the UK, & Belgium. If you
-              need another country, please contact me on either:
+              Currently shipping to North America and Europe. If your country
+              isn't listed, please contact me on either:
             </p>
             <div className="flex space-x-4">
               <a

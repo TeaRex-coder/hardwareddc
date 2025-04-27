@@ -1,0 +1,92 @@
+[
+  {
+    "keys": ["alt", "shift", "1"],
+    "action": "setBrightness",
+    "value": 25
+  },
+  {
+    "keys": ["alt", "shift", "2"],
+    "action": "setBrightness",
+    "value": 50
+  },
+  {
+    "keys": ["alt", "shift", "3"],
+    "action": "setBrightness",
+    "value": 75
+  },
+  {
+    "keys": ["alt", "shift", "4"],
+    "action": "setBrightness",
+    "value": 100
+  },
+  {
+    "keys": ["alt", "shift", "5"],
+    "action": "setBrightness",
+    "value": 0
+  },
+  {
+    "keys": ["ctrl", "shift", "q"],
+    "action": "adjustBrightness",
+    "value": -10
+  },
+  {
+    "keys": ["alt", "shift", "="],
+    "action": "adjustBrightness",
+    "value": 10
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "1"],
+    "action": "setContrast",
+    "value": 25
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "2"],
+    "action": "setContrast",
+    "value": 50
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "3"],
+    "action": "setContrast",
+    "value": 75
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "4"],
+    "action": "setContrast",
+    "value": 100
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "5"],
+    "action": "setContrast",
+    "value": 0
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "-"],
+    "action": "adjustContrast",
+    "value": -10
+  },
+  {
+    "keys": ["ctrl", "alt", "shift", "="],
+    "action": "adjustContrast",
+    "value": 10
+  },
+  {
+    "keys": ["alt", "shift", "d", "1"],
+    "action": "setSource",
+    "value": "0x0f"
+  },
+  {
+    "keys": ["alt", "shift", "d", "2"],
+    "action": "setSource",
+    "value": "0x10"
+  },
+  {
+    "keys": ["alt", "shift", "h", "1"],
+    "action": "setSource",
+    "value": "0x11"
+  },
+  {
+    "keys": ["alt", "shift", "h", "2"],
+    "action": "setSource",
+    "value": "0x12"
+  }
+] 

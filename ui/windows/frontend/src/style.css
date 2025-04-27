@@ -19,20 +19,3 @@ body {
   src: local(""),
     url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
 }
-
-#app {
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-}

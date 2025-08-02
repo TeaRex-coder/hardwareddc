@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "HDMILibrary")(type "KiCad")(uri "${KIPRJMOD}/Libraries/HDMILibrary.pretty")(options "")(descr ""))
+)

@@ -22,6 +22,19 @@ __pycache__
 .vscode/launch.json
 .vscode/ipch
 
+# KicCad
+# https://gist.github.com/cowboy/71a35998640eb5a6c50680c979b35187
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_prl
+*.sch-bak
+*-save.pro
+*-save.kicad_pcb
+fp-info-cache
+/build
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -19,3 +19,7 @@ Learnings:
 
 - This solution is jank and pretty unstable
 - Next time, I'll try using [TI's M-LVDS](https://www.ti.com/lit/ug/tidu599/tidu599.pdf) transceivers to interact with the Aux channel
+
+## Hardware DDC Aux Breakout
+
+This board is a work in progress

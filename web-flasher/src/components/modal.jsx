@@ -22,9 +22,15 @@ const ModalComponent = () => {
             <p className="text-lg font-medium text-neutral-800 dark:text-neutral-50">
               CA$89
             </p>
+            {/*
             <p className="text-sm text-neutral-800 dark:text-neutral-50">
               Currently shipping to North America and Europe. If your country
               isn't listed, please contact me on either:
+            </p>
+            */}
+            <p className="text-sm text-neutral-800 dark:text-neutral-50">
+              Currently out of stock. If you're interested, please contact me on
+              either:
             </p>
             <div className="flex space-x-4">
               <a
@@ -50,6 +56,7 @@ const ModalComponent = () => {
                 Email
               </a>
             </div>
+            {/*
             <a
               href="https://buy.stripe.com/aEUaH1c6540ifu09AE"
               target="_blank"
@@ -58,6 +65,7 @@ const ModalComponent = () => {
             >
               Buy
             </a>
+            */}
           </ModalContent>
           <ModalFooter> </ModalFooter>
         </ModalBody>

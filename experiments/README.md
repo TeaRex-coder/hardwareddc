@@ -22,4 +22,15 @@ Learnings:
 
 ## Hardware DDC Aux Breakout
 
-This board is a work in progress
+This board *attempts* to "sniff" the DisplayPort auxiliary channel using [TI's SN65MLVD200AD](https://www.ti.com/lit/ds/symlink/sn65mlvd200a.pdf).
+
+What I learned:
+- How to better route high-speed differential pairs (DisplayPort video signal)
+- Improved understanding of DisplayPort AUX
+
+What didn't work:
+- Sniffing the AUX channel
+
+I think it didn't work because of my false assumptions of the physical hardware layout of DisplayPort AUX on both the source and sink. Possible also because of the assumptions I made before understanding the communication protocol.
+
+In the future, I'll be trying using a more traditional Hardware layout as suggested in the DisplayPort 1.2 documentation to using a more MitM-like approach inspired by [JX5S' work](https://github.com/JX5S/DP_aux_emulator).

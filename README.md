@@ -54,6 +54,8 @@ I hope the experience I received is representative of any regular PCBWay custome
 
 </details>
 
+Thank you Flux AI for providing [breakout boards](./experiments/hardwareddc-aux-breakout) for HardwareDDC <3
+
 ## Future Ideas
 
 - [x] Improve Microsoft Windows UX/Create Proper User Interface

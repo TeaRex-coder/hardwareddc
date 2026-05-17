@@ -54,6 +54,8 @@ I hope the experience I received is representative of any regular PCBWay custome
 
 </details>
 
+<img src="./images/fluxlogo.svg" alt="Flux Logo" width="200"/>
+
 Thank you Flux AI for providing [breakout boards](./experiments/hardwareddc-aux-breakout) for HardwareDDC <3
 
 ## Future Ideas
@@ -62,7 +64,7 @@ Thank you Flux AI for providing [breakout boards](./experiments/hardwareddc-aux-
   - [ ] Add more information to GUI (e.g. connection status)
   - [ ] Enable user-modifiable hotkeys
 - [ ] Support Multiple Monitors
-- [x] Convert DisplayPort to VGA for a non-network-based approach
+- [ ] Create a non-network-based approach
 
 ## Extras
 

@@ -20,7 +20,7 @@ Learnings:
 - This solution is jank and pretty unstable
 - Next time, I'll try using [TI's M-LVDS](https://www.ti.com/lit/ug/tidu599/tidu599.pdf) transceivers to interact with the Aux channel
 
-## HardwareDDC Aux Breakout
+## HardwareDDC Aux 2.0 "Breakout"
 
 This board _attempts_ to "sniff" the DisplayPort auxiliary channel using [TI's SN65MLVD200AD](https://www.ti.com/lit/ds/symlink/sn65mlvd200a.pdf).
 
@@ -37,6 +37,6 @@ I think it didn't work because of my false assumptions of the physical hardware 
 
 In the future, I'll be trying using a more traditional Hardware layout as suggested in the DisplayPort 1.2 standards document to using a more MitM-like approach inspired by [JX5S' work](https://github.com/JX5S/DP_aux_emulator).
 
-## HardwareDDC AUX MitM
+## HardwareDDC AUX 2.1 "MitM"
 
 WIP
